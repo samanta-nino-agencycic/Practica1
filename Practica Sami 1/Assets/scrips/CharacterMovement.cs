@@ -4,11 +4,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class public class ScripDePrueba : MonoBehaviour
- : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
+    private Animator animator;
 
     public Vector3 rayOffsetCirclePosition;
     public float moveSpeed = 4f; // Velocidad máxima
@@ -27,7 +27,8 @@ public class public class ScripDePrueba : MonoBehaviour
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); // atraer el componente
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -52,6 +53,8 @@ public class public class ScripDePrueba : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal"); // Usa Raw para mejor control
+
+        animator.SetFloat("Speed", horizontal);
 
         isMoving = horizontal != 0;
 
